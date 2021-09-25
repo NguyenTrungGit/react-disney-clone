@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+Project Hosting Link: https://disney-plus-ntcoder.web.app
+
+Please login with your google account to continue...
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
