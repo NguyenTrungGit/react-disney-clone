@@ -107,7 +107,5 @@ const CTALogoTwo = styled.img`
   width: 100%;
 `;
 
-// https://youtu.be/R_OERlafbmw?t=2781 
-
 export default Login;
 /* eslint-disable*/
