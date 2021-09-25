@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, provider } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
+  setSignOutState
 } from "../features/user/userSlice";
 
 const Header = (props) => {
@@ -17,6 +18,15 @@ const Header = (props) => {
   const history = useHistory();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        history.push("/home");
+      }
+    });
+  }, [userName]);
 
   const handleAuth = () => {
     if (!userName) {
@@ -89,7 +99,12 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src={userPhoto} alt={userName} />
+          <SignOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sign out</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav>
@@ -218,6 +233,44 @@ const Login = styled.a`
 
 const UserImg = styled.img`
   height: 100%;
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  background-color: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.35);
+  border-radius: 0.25rem;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0 px;
+  padding: 0.625rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.25rem;
+  width: 100px;
+  opacity: 0;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  ${UserImg} {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
 `;
 
 export default Header;
