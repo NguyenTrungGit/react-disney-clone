@@ -138,7 +138,7 @@ const Nav = styled.nav`
 const Logo = styled.a`
   padding: 0;
   width: 5rem;
-  max-height: 6rem;
+  max-height: 4.5rem;
   font-size: 0;
   display: inline-block;
 
