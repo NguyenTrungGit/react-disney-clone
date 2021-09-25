@@ -10,7 +10,7 @@ import {
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
-  setSignOutState
+  setSignOutState,
 } from "../features/user/userSlice";
 
 const Header = (props) => {
@@ -197,6 +197,10 @@ const NavMenu = styled.div`
         transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
         visibility: hidden;
         width: auto;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 0.75rem;
       }
     }
 
